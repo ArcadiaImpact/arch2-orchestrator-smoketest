@@ -1,0 +1,4 @@
+{
+  "kind": "base-control",
+  "note": "No-op control submission. Verifies the submit -> held-out eval -> score path end to end; introduces no method change."
+}
