@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ARCH toysmoke leaderboard</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: -apple-system, "Segoe UI", sans-serif; max-width: 860px;
+         margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+  h1, h2 { margin-bottom: 0.3rem; }
+  .muted { color: #767676; font-size: 0.9rem; }
+  table { border-collapse: collapse; width: 100%; margin: 0.5rem 0 1.5rem; }
+  th, td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid #8884; }
+  th { font-weight: 600; }
+  .bar { fill: #4f7cff; }
+  .bar-label, .bar-score { font-size: 11px; fill: currentColor; }
+  svg { overflow: visible; max-width: 100%; }
+</style>
+</head>
+<body>
+<h1>ARCH toysmoke leaderboard</h1>
+<p class="muted">All six attempts scored exactly 20.0 — a complete tie, so the rank column below is an arbitrary ordering of equals (this renderer breaks ties by descending PR number). The authoritative wrap-up ranking breaks ties by earliest submission and is stamped on the PR titles: #2=rank 1, #3=rank 2, #4=rank 3, #5=rank 4, #6=rank 5, each carrying a brief at findings/toysmoke/brief.md on its own branch. The score cannot discriminate between these attempts: the task has one correct answer and every attempt found it. Generated 2026-08-19 22:51 UTC.</p>
+<svg viewBox="0 0 372 220" width="100%" height="220" role="img" aria-label="Score by PR"><rect x="12" y="16" width="48" height="180" rx="3" class="bar"/><text x="36.0" y="214" class="bar-label" text-anchor="middle">#7</text><text x="36.0" y="10" class="bar-score" text-anchor="middle">20.000</text><rect x="72" y="16" width="48" height="180" rx="3" class="bar"/><text x="96.0" y="214" class="bar-label" text-anchor="middle">#6</text><text x="96.0" y="10" class="bar-score" text-anchor="middle">20.000</text><rect x="132" y="16" width="48" height="180" rx="3" class="bar"/><text x="156.0" y="214" class="bar-label" text-anchor="middle">#5</text><text x="156.0" y="10" class="bar-score" text-anchor="middle">20.000</text><rect x="192" y="16" width="48" height="180" rx="3" class="bar"/><text x="216.0" y="214" class="bar-label" text-anchor="middle">#4</text><text x="216.0" y="10" class="bar-score" text-anchor="middle">20.000</text><rect x="252" y="16" width="48" height="180" rx="3" class="bar"/><text x="276.0" y="214" class="bar-label" text-anchor="middle">#3</text><text x="276.0" y="10" class="bar-score" text-anchor="middle">20.000</text><rect x="312" y="16" width="48" height="180" rx="3" class="bar"/><text x="336.0" y="214" class="bar-label" text-anchor="middle">#2</text><text x="336.0" y="10" class="bar-score" text-anchor="middle">20.000</text></svg>
+<table>
+  <thead><tr><th>rank</th><th>PR</th><th>score</th><th>state</th><th>title</th></tr></thead>
+  <tbody>
+<tr><td>1</td><td><a href="https://github.com/ArcadiaImpact/arch2-orchestrator-smoketest/pull/7">#7</a></td><td>20.0000</td><td>open</td><td>[Worker-0] Use exact Decimal arithmetic to remove float-conversion rounding erro</td></tr>
+<tr><td>2</td><td><a href="https://github.com/ArcadiaImpact/arch2-orchestrator-smoketest/pull/6">#6</a></td><td>20.0000</td><td>open</td><td>[#5 · 20.0] [Worker-0] Use compensated summation (math.fsum) for a precision-rob</td></tr>
+<tr><td>3</td><td><a href="https://github.com/ArcadiaImpact/arch2-orchestrator-smoketest/pull/5">#5</a></td><td>20.0000</td><td>open</td><td>[#4 · 20.0] [Worker-0] Harden CSV parsing so a malformed row can&#x27;t crash the eva</td></tr>
+<tr><td>4</td><td><a href="https://github.com/ArcadiaImpact/arch2-orchestrator-smoketest/pull/4">#4</a></td><td>20.0000</td><td>open</td><td>[#3 · 20.0] [Worker-0] Try the median vs. the arithmetic mean</td></tr>
+<tr><td>5</td><td><a href="https://github.com/ArcadiaImpact/arch2-orchestrator-smoketest/pull/3">#3</a></td><td>20.0000</td><td>open</td><td>[#2 · 20.0] [Worker-0] Try a trimmed mean vs. the arithmetic mean (direction 2)</td></tr>
+<tr><td>6</td><td><a href="https://github.com/ArcadiaImpact/arch2-orchestrator-smoketest/pull/2">#2</a></td><td>20.0000</td><td>open</td><td>[#1 · 20.0] [Worker-0] Verify arithmetic mean baseline (direction 1)</td></tr>
+  </tbody>
+</table>
+</body>
+</html>
