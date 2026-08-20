@@ -16,8 +16,19 @@ def main() -> int:
     with csv_path.open() as f:
         values = [float(row["value"]) for row in csv.DictReader(f)]
 
-    score = sum(values) / len(values)
-    record = {"score": score, "metrics": {"n": len(values)}, "notes": ""}
+    baseline_mean = sum(values) / len(values)
+
+    if len(values) >= 3:
+        trimmed = sorted(values)[1:-1]
+    else:
+        trimmed = values
+    score = sum(trimmed) / len(trimmed)
+
+    record = {
+        "score": score,
+        "metrics": {"n": len(values), "n_trimmed": len(trimmed), "baseline_mean": baseline_mean},
+        "notes": "trimmed mean: drops the single min and single max value before averaging",
+    }
     output_path.write_text(json.dumps(record))
     return 0
 
