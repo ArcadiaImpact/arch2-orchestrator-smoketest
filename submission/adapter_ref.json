@@ -1,0 +1,8 @@
+{
+  "task": "toysmoke2",
+  "kind": "base-control",
+  "adapter": null,
+  "description": "Base/control no-op submission. Changes nothing about how the score is computed — eval.py is untouched from the arch/toysmoke2 base branch. Its only purpose is to exercise the submit -> held-out eval -> score path end to end before the worker fleet is spawned.",
+  "expected_heldout_score": 20.0,
+  "expected_public_score": 3.0
+}
