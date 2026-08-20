@@ -1,8 +1,14 @@
-"""Toy smoke-test eval: mean of values in sample.csv. Reads ARCH_DATA_ROOT."""
+"""Toy smoke-test eval: mean of values in sample.csv. Reads ARCH_DATA_ROOT.
+
+Uses math.fsum instead of the builtin sum() so floating-point rounding
+error does not accumulate across the addition chain (see
+attempts/fsum-mean/RESEARCH_LOG.md).
+"""
 from __future__ import annotations
 
 import csv
 import json
+import math
 import os
 import sys
 from pathlib import Path
@@ -16,8 +22,19 @@ def main() -> int:
     with csv_path.open() as f:
         values = [float(row["value"]) for row in csv.DictReader(f)]
 
-    score = sum(values) / len(values)
-    record = {"score": score, "metrics": {"n": len(values)}, "notes": ""}
+    naive_sum = sum(values)
+    compensated_sum = math.fsum(values)
+    score = compensated_sum / len(values)
+    record = {
+        "score": score,
+        "metrics": {
+            "n": len(values),
+            "naive_sum": naive_sum,
+            "compensated_sum": compensated_sum,
+            "sum_delta": compensated_sum - naive_sum,
+        },
+        "notes": "",
+    }
     output_path.write_text(json.dumps(record))
     return 0
 
