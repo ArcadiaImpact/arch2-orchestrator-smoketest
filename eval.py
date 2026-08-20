@@ -1,9 +1,15 @@
-"""Toy smoke-test eval: mean of values in sample.csv. Reads ARCH_DATA_ROOT."""
+"""Toy smoke-test eval: median of values in sample.csv. Reads ARCH_DATA_ROOT.
+
+Reports the median instead of the arithmetic mean, and also computes the
+mean alongside it so the two can be compared directly (see
+attempts/median/RESEARCH_LOG.md).
+"""
 from __future__ import annotations
 
 import csv
 import json
 import os
+import statistics
 import sys
 from pathlib import Path
 
@@ -16,8 +22,14 @@ def main() -> int:
     with csv_path.open() as f:
         values = [float(row["value"]) for row in csv.DictReader(f)]
 
-    score = sum(values) / len(values)
-    record = {"score": score, "metrics": {"n": len(values)}, "notes": ""}
+    mean = sum(values) / len(values)
+    median = statistics.median(values)
+    score = median
+    record = {
+        "score": score,
+        "metrics": {"n": len(values), "mean": mean, "median": median, "mean_minus_median": mean - median},
+        "notes": "",
+    }
     output_path.write_text(json.dumps(record))
     return 0
 
