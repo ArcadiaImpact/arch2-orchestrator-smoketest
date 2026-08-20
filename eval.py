@@ -4,6 +4,7 @@ from __future__ import annotations
 import csv
 import json
 import os
+import statistics
 import sys
 from pathlib import Path
 
@@ -16,8 +17,27 @@ def main() -> int:
     with csv_path.open() as f:
         values = [float(row["value"]) for row in csv.DictReader(f)]
 
-    score = sum(values) / len(values)
-    record = {"score": score, "metrics": {"n": len(values)}, "notes": ""}
+    # `statistics.mean` does not sum floats directly. Internally it converts
+    # each input to an exact `fractions.Fraction`, sums those exactly (a
+    # Fraction sum has no rounding error at any step, since fractions have
+    # unbounded-precision numerators/denominators), and only converts back to
+    # `float` once at the very end. That is a third distinct route to a more
+    # precise mean, alongside `math.fsum` (compensated binary-float summation)
+    # and `decimal.Decimal` (exact base-10 arithmetic) explored in prior
+    # attempts on this task: this one stays exact by working in exact
+    # rationals rather than in any fixed-radix floating-point representation.
+    naive_mean = sum(values) / len(values)
+    fraction_mean = statistics.mean(values)
+    score = fraction_mean
+    record = {
+        "score": score,
+        "metrics": {
+            "n": len(values),
+            "naive_mean": naive_mean,
+            "means_agree": naive_mean == fraction_mean,
+        },
+        "notes": "",
+    }
     output_path.write_text(json.dumps(record))
     return 0
 
