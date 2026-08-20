@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 import os
 import sys
 from pathlib import Path
@@ -16,8 +17,19 @@ def main() -> int:
     with csv_path.open() as f:
         values = [float(row["value"]) for row in csv.DictReader(f)]
 
-    score = sum(values) / len(values)
-    record = {"score": score, "metrics": {"n": len(values)}, "notes": ""}
+    plain_sum = sum(values)
+    compensated_sum = math.fsum(values)
+    score = compensated_sum / len(values)
+    record = {
+        "score": score,
+        "metrics": {
+            "n": len(values),
+            "plain_sum": plain_sum,
+            "compensated_sum": compensated_sum,
+            "sum_diff": compensated_sum - plain_sum,
+        },
+        "notes": "",
+    }
     output_path.write_text(json.dumps(record))
     return 0
 
