@@ -1,0 +1,6 @@
+{
+  "kind": "base-control",
+  "description": "No-op control submission. Changes nothing about the eval or the data; exercises the submit -> label -> workflow -> held-out pod -> score path only.",
+  "method": "unchanged in-repo eval.py (arithmetic mean of ARCH_DATA_ROOT/sample.csv)",
+  "expected_heldout_score": 20.0
+}
