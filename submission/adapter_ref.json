@@ -1,0 +1,5 @@
+{
+  "kind": "base_control",
+  "adapter": null,
+  "note": "No-op base/control submission. Exercises the submit -> GitHub Actions -> held-out RunPod pod -> score path without changing the method. Opened by arch-init Phase 4 as the pre-fleet canary."
+}
