@@ -13,11 +13,25 @@ def main() -> int:
     output_path = Path(os.environ["ARCH_EVAL_OUTPUT"])
 
     csv_path = data_root / "sample.csv"
+    values: list[float] = []
+    skipped = 0
     with csv_path.open() as f:
-        values = [float(row["value"]) for row in csv.DictReader(f)]
+        for row in csv.DictReader(f):
+            raw = (row.get("value") or "").strip()
+            if not raw:
+                skipped += 1
+                continue
+            try:
+                values.append(float(raw))
+            except ValueError:
+                skipped += 1
+
+    if not values:
+        raise ValueError(f"no numeric rows found in {csv_path}")
 
     score = sum(values) / len(values)
-    record = {"score": score, "metrics": {"n": len(values)}, "notes": ""}
+    notes = f"skipped {skipped} malformed/blank row(s)" if skipped else ""
+    record = {"score": score, "metrics": {"n": len(values), "skipped": skipped}, "notes": notes}
     output_path.write_text(json.dumps(record))
     return 0
 
